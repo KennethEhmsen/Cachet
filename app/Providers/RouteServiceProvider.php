@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace CachetHQ\Cachet\Foundation\Providers;
+namespace CachetHQ\Cachet\Providers;
 
 use CachetHQ\Cachet\Http\Middleware\Acceptable;
 use CachetHQ\Cachet\Http\Middleware\Authenticate;
@@ -151,8 +151,8 @@ class RouteServiceProvider extends ServiceProvider
         ];
 
         if ($applyAlwaysAuthenticate && !$this->isWhiteListedAuthRoute($routes)) {
-            $middleware[] = Authenticate::class;
             $middleware[] = RemoteUserAuthenticate::class;
+            $middleware[] = Authenticate::class;
         }
 
         $router->group(['middleware' => $middleware], function (Router $router) use ($routes) {
